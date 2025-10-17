@@ -46,6 +46,93 @@ button.control {
     font-size: 20px;
     padding: 12px 25px;
     margin: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-button.control:hover { background-color: #555; }
+button.control:hover { 
+    background-color: #555; 
+}
+
+/* --- Botones para sumar/restar puntos directamente --- */
+.botones-marcador {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 40px;
+}
+
+.botones-marcador > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.botones-marcador h3 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+/* Botones de puntuación en fila */
+.botones-marcador .botones-fila {
+    display: flex;
+    gap: 10px; /* espacio entre botones */
+}
+
+/* Botones de puntos */
+button.rojo-btn, button.azul-btn, button.negativo {
+    padding: 12px 20px;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    min-width: 100px;
+}
+
+/* Colores por jugador */
+button.rojo-btn { background-color: #D32F2F; color: #fff; }
+button.rojo-btn:hover { background-color: #FF5252; }
+
+button.azul-btn { background-color: #1976D2; color: #fff; }
+button.azul-btn:hover { background-color: #64B5F6; }
+
+/* Botón de restar puntos */
+button.negativo { background-color: #555; color: #fff; }
+button.negativo:hover { background-color: #777; }
+
+/* Responsive: en pantallas pequeñas los botones se ajustan */
+@media (max-width: 600px) {
+    #marcador .jugador {
+        width: 180px;
+        height: 180px;
+        font-size: 60px;
+    }
+
+    #tiempo {
+        font-size: 60px;
+    }
+
+    #ronda-display {
+        font-size: 28px;
+    }
+
+    .botones-marcador {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .botones-marcador .botones-fila {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    button.rojo-btn, button.azul-btn, button.negativo {
+        min-width: 80px;
+        font-size: 18px;
+        padding: 10px 12px;
+    }
+}

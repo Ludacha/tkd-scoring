@@ -26,6 +26,26 @@
         <button class="control" onclick="continuarRonda()">Continuar</button>
     </div>
 
+    <!-- Botones para sumar o restar puntos directamente desde el marcador -->
+    <div class="botones-marcador">
+        <div>
+            <h3>Rojo</h3>
+            <div class="botones-fila">
+                <button class="rojo-btn" onclick="enviarPunto('rojo',1)">+1 Normal</button>
+                <button class="rojo-btn" onclick="enviarPunto('rojo',2)">+2 Giro</button>
+                <button class="negativo" onclick="enviarPunto('rojo',-1)">-1 Error</button>
+            </div>
+        </div>
+        <div>
+            <h3>Azul</h3>
+            <div class="botones-fila">
+                <button class="azul-btn" onclick="enviarPunto('azul',1)">+1 Normal</button>
+                <button class="azul-btn" onclick="enviarPunto('azul',2)">+2 Giro</button>
+                <button class="negativo" onclick="enviarPunto('azul',-1)">-1 Error</button>
+            </div>
+        </div>
+    </div>
+    
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
@@ -56,6 +76,10 @@
 
         function continuarRonda(){
             socket.emit('continuarRonda'); // Reanudar en el servidor
+        }
+
+        function enviarPunto(jugador, pts){
+        socket.emit('puntos',{jugador:jugador,puntos:pts});
         }
     </script>
 </body>
