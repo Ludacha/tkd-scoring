@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Marcador TKD</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="estilomarcador.css">
+</head>
+<body>
+    <h1>Marcador Central</h1>
+    <h2 id="ronda-display">Ronda: <span id="ronda">1</span></h2>
+
+    <div id="marcador">
+        <div class="jugador rojo" id="rojo">0</div>
+        <div class="jugador azul" id="azul">0</div>
+    </div>
+
+    <div id="tiempo">60</div>
+
+    <!-- Botones de control -->
+    <div class="botones-control">
+        <button class="control" onclick="iniciarRonda()">Iniciar Ronda</button>
+        <button class="control" onclick="siguienteRonda()">Siguiente Ronda</button>
+        <button class="control" onclick="resetear()">Reset</button>
+        <button class="control" onclick="pausarRonda()">Pausar</button>
+        <button class="control" onclick="continuarRonda()">Continuar</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        // Variables de control de tiempo
+        let tiempoPausado = false;
+
+        // Actualiza los datos en tiempo real
+        socket.on('update', (data) => {
+            document.getElementById('ronda').innerText = data.ronda;
+            document.getElementById('tiempo').innerText = data.tiempo;
+            document.getElementById('rojo').innerText = data.puntos.rojo;
+            document.getElementById('azul').innerText = data.puntos.azul;
+        });
+
+        socket.on('rondaFinalizada', (ronda) => {
+            alert('Ronda ' + ronda + ' finalizada');
+        });
+
+        // Funciones de control
+        function iniciarRonda(){ socket.emit('iniciarRonda'); }
+        function siguienteRonda(){ socket.emit('siguienteRonda'); }
+        function resetear(){ socket.emit('reset'); }
+
+        function pausarRonda(){
+            socket.emit('pausarRonda'); // Enviamos evento al servidor
+        }
+
+        function continuarRonda(){
+            socket.emit('continuarRonda'); // Reanudar en el servidor
+        }
+    </script>
+</body>
+</html>

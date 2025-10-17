@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juez TKD</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="estilojuez.css">
+</head>
+<body>
+<h1>Panel del Juez</h1>
+
+<div class="contenedor-jueces">
+    <!-- Contenedor jugador Rojo -->
+    <div class="jugador-rojo">
+        <h2>Rojo</h2>
+        <button class="rojo" onclick="enviarPunto('rojo',1)">Puño +1</button>
+        <button class="rojo" onclick="enviarPunto('rojo',2)">Peto +2</button>
+        <button class="rojo" onclick="enviarPunto('rojo',3)">Cabeza +3</button>
+    </div>
+
+    <!-- Contenedor jugador Azul -->
+    <div class="jugador-azul">
+        <h2>Azul</h2>
+        <button class="azul" onclick="enviarPunto('azul',1)">Puño +1</button>
+        <button class="azul" onclick="enviarPunto('azul',2)">Peto +2</button>
+        <button class="azul" onclick="enviarPunto('azul',3)">Cabeza +3</button>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+
+// Función para enviar puntos al servidor
+function enviarPunto(jugador, pts){
+    socket.emit('punto',{jugador:jugador,puntos:pts});
+
+    // Sonido al marcar punto
+    const audio = new Audio('https://freesound.org/data/previews/341/341695_6241151-lq.mp3');
+    audio.play();
+}
+</script>
+</body>
+</html>

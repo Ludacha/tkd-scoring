@@ -1,0 +1,44 @@
+/* --- Contenedor botones del juez --- */
+.contenedor-jueces {
+    display: flex;
+    justify-content: space-between; /* Rojo izquierda, Azul derecha */
+    margin: 40px 10px;
+    flex-wrap: wrap;
+}
+
+.jugador-rojo, .jugador-azul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Botones jueces grandes --- */
+button.rojo, button.azul {
+    font-weight: bold;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 45vw;           /* Proporcional al ancho de pantalla */
+    height: 30vh;          /* Proporcional a la altura de la pantalla */
+    min-height: 150px;     /* Nunca más pequeño que esto */
+    max-height: 500px;     /* Nunca más grande que esto */
+    font-size: 26px;
+    margin: 8px 0;
+}
+
+button.rojo { background-color: #D32F2F; color: #fff; }
+button.rojo:hover { background-color: #FF5252; }
+
+button.azul { background-color: #1976D2; color: #fff; }
+button.azul:hover { background-color: #64B5F6; }
+
+/* Ajustes extra para pantallas muy pequeñas */
+@media (max-width: 480px){
+    button.rojo, button.azul {
+        width: 95%;      /* Casi todo el ancho del dispositivo */
+        height: 28vh;    /* Cada botón ocupa 28% de la altura */
+        font-size: 28px; /* Texto legible */
+        margin: 6px 0;
+    }
+}
